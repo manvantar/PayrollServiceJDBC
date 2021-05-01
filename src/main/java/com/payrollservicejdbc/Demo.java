@@ -13,6 +13,7 @@ public class Demo {
         String userName="root";
         String password="1234";
         Connection connection;
+        
         try{
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Driver loaded");
