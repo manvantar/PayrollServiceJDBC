@@ -49,4 +49,23 @@ public class EmployeePayrollDBService {
         }
         return employeePayrollDataList;
     }
+
+    /*This method used to update the salary of employees
+    @param takes parameters name and salary
+    @return boolean value true if updated successfully else false
+     */
+    public boolean updateEmployeeDataUsingStatement(String name, Double salary) {
+        //alternate way String sql1 = " update employee_payroll set salary ='"+salary+"' where name ='"+name+"'";
+        String sql = String.format("update employee_payroll set salary = %.2f where name = '%s';", salary, name);
+        try (Connection connection = this.getConnection("localhost","payroll_service",
+                "root","1234")) {
+            Statement statement = connection.createStatement();
+            int result= statement.executeUpdate(sql);
+            if (result==1)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -17,5 +17,13 @@ public class EmpPayrollTester {
         Assertions.assertEquals(3, employeePayrollList.size());
     }
 
+   @Test
+    public void givenEmployeePayrollUpdateDetails_whenUpdated_shouldMatch() throws SQLException {
+        employeePayrollService = new EmployeePayrollService();
+        employeePayrollList = employeePayrollService.readEmployeePayrollData(EmployeePayrollService.IOService.DB_IO);
+        boolean result=employeePayrollService.updateSalary("marlin",32.0);
+        Assertions.assertTrue(result);
+
+    }
 
 }
