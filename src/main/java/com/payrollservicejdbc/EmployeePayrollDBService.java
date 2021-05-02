@@ -105,7 +105,7 @@ public class EmployeePayrollDBService {
         return employeePayrollDataList;
     }
 
-   public List<EmployeePayrollData> getEmployeePayrollData(String name) {
+    public List<EmployeePayrollData> getEmployeePayrollData(String name) {
         List<EmployeePayrollData> employeePayrollDataList = null;
         if (this.employeePayrollDataStatement == null)
             this.prepareStatementForEmployeeData();
@@ -146,6 +146,33 @@ public class EmployeePayrollDBService {
         }
     }
 
+    /*This method used to get The data of particular employeeName
+     @param takes STARTDATE AND ENDDATE AS input
+     @return list of employes data
+     */
+
+    public List<EmployeePayrollData> readDatadate(LocalDate startDate, LocalDate endDate) throws SQLException {
+        String sql=String.format("Select * from employee_payroll where start_date between '%s' and '%s'",startDate,endDate);
+        List<EmployeePayrollData> employeePayrollDataList=new ArrayList<>();
+        try(Connection connection = this.getConnection("localhost","payroll_service",
+                "root","1234");) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet= statement.executeQuery(sql);
+            while (resultSet.next()){
+                int id=resultSet.getInt("id");
+                String name=resultSet.getString("name");
+                double salary=resultSet.getDouble("salary");
+                LocalDate start_Date=resultSet.getDate("start_date").toLocalDate();
+                employeePayrollDataList.add(new EmployeePayrollData(id,name,salary,start_Date));
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return employeePayrollDataList;
+    }
 
 
 }

@@ -73,5 +73,15 @@ public class EmployeePayrollService {
                 employeePayrollDataItem.name.equals(name)).findFirst().orElse(null);
     }
 
+    /*This method used to get The data of particular employeeName
+     @param takes STARTDATE AND ENDDATE AS input
+     @return list of employes data
+     */
+
+    public List<EmployeePayrollData> getData(LocalDate startDate,LocalDate endDate) throws SQLException {
+        List<EmployeePayrollData> employeePayrollDataList;
+        EmployeePayrollDBService employeePayrollDBService=new EmployeePayrollDBService();
+        return employeePayrollDataList=employeePayrollDBService.readDatadate(startDate,endDate);
+    }
 
 }
