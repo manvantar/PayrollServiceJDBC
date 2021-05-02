@@ -43,4 +43,11 @@ public class EmpPayrollTester {
         Assertions.assertEquals(2,employeePayrollList.size());
     }
 
+    @Test
+    public void givenQuerytoTest_WhenRetrived_shouldreturnAvgSumMinMax() throws SQLException,NullPointerException {
+        List<EmployeePayrollData> employeePayrollDataList;
+        employeePayrollService = new EmployeePayrollService();
+        employeePayrollDataList=employeePayrollService.readEmployeePayrollAggregate();
+        Assertions.assertEquals(2,employeePayrollDataList.size());
+    }
 }

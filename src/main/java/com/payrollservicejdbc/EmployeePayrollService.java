@@ -84,4 +84,16 @@ public class EmployeePayrollService {
         return employeePayrollDataList=employeePayrollDBService.readDatadate(startDate,endDate);
     }
 
+    /*This method used to get The AggregateData employeeTable
+     @return list of employes Agrreagate data
+     */
+
+    public List<EmployeePayrollData> readEmployeePayrollAggregate() throws SQLException {
+        List<EmployeePayrollData> employeePayrollDataList;
+        EmployeePayrollDBService employeePayrollDBService=new EmployeePayrollDBService();
+        employeePayrollDataList =employeePayrollDBService.employeePayrollAggregate();
+        return employeePayrollDataList;
+    }
+
+
 }
